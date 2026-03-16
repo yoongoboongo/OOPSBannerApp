@@ -1,71 +1,60 @@
+import java.util.HashMap;
+
 public class OOPSBanner {
-
-    static class CharacterPattern {
-        private char character;
-        private String[] pattern;
-
-        public CharacterPattern(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
-
-        public String[] getPattern() {
-            return pattern;
-        }
-    }
 
     public static void main(String[] args) {
 
-        CharacterPattern letterO = new CharacterPattern('O', new String[]{
-                " ***** ",
-                "*     *",
-                "*     *",
-                "*     *",
-                "*     *",
-                "*     *",
-                " ***** "
-        });
-		CharacterPattern letterO2 = new CharacterPattern('O', new String[]{
-                " ***** ",
-                "*     *",
-                "*     *",
-                "*     *",
-                "*     *",
-                "*     *",
-                " ***** "
-        });
+        HashMap<Character, String[]> patternMap = new HashMap<>();
 
+        String[] O = {
+                " *** ",
+                "*   *",
+                "*   *",
+                "*   *",
+                " *** "
+        };
 
-        CharacterPattern letterP = new CharacterPattern('P', new String[]{
-                " ***** ",
-                "*     *",
-                "*     *",
-                " ***** ",
-                "*      ",
-                "*      ",
-                "*      "
-        });
+        String[] P = {
+                "**** ",
+                "*   *",
+                "**** ",
+                "*    ",
+                "*    "
+        };
 
-        CharacterPattern letterS = new CharacterPattern('S', new String[]{
-                " ***** ",
-                "*      ",
-                "*      ",
-                " ***** ",
-                "      *",
-                "      *",
-                " ***** "
-        });
+        String[] S = {
+                " ****",
+                "*    ",
+                " *** ",
+                "    *",
+                "**** "
+        };
 
-        CharacterPattern[] banner = {letterO, letterO, letterP, letterS};
+        patternMap.put('O', O);
+        patternMap.put('P', P);
+        patternMap.put('S', S);
 
-        for (int row = 0; row < 7; row++) {
-            StringBuilder line = new StringBuilder();
+        String word = "OOPS";
 
-            for (CharacterPattern cp : banner) {
-                line.append(cp.getPattern()[row]).append("  ");
+        renderBanner(word, patternMap);
+    }
+
+    public static void renderBanner(String word, HashMap<Character, String[]> patternMap) {
+
+        int rows = patternMap.get('O').length;
+
+        for(int i = 0; i < rows; i++) {
+
+            for(int j = 0; j < word.length(); j++) {
+
+                char letter = word.charAt(j);
+
+                String[] pattern = patternMap.get(letter);
+
+                System.out.print(pattern[i] + " ");
             }
 
-            System.out.println(line);
+            System.out.println();
         }
     }
 }
